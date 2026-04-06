@@ -1,11 +1,11 @@
-import { authPaths } from "./paths/auth.paths";
-import { financePaths } from "./paths/finance.paths";
+import { authPaths } from "./paths/auth.paths.js";
+import { financePaths } from "./paths/finance.paths.js";
 
-import { securitySchemes } from "./components/security";
-import { dashboardPaths } from "./paths/dashboard.path";
-import { authSchemas } from "./schemas/auth.schema";
-import { financeSchemas } from "./schemas/finance.schema";
-import { dashboardSchemas } from "./schemas/dashboard.schema";
+import { securitySchemes } from "./components/security.js";
+import { dashboardPaths } from "./paths/dashboard.path.js";
+import { authSchemas } from "./schemas/auth.schema.js";
+import { financeSchemas } from "./schemas/finance.schema.js";
+import { dashboardSchemas } from "./schemas/dashboard.schema.js";
 
 export const swaggerDocument = {
   openapi: "3.0.0",

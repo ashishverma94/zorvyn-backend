@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { AppError } from "../../middleware/errorHandler";
+import { AppError } from "../../middleware/errorHandler.js";
 import { prisma } from "../../config/prisma";
 
 export const registerUser = async (data: any) => {

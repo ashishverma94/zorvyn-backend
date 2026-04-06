@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getSummary, getCategory, getTrends } from "./dashboard.controller";
+import { getSummary, getCategory, getTrends } from "./dashboard.controller.js";
 import { authenticate, authorizeRoles } from "../../middleware/auth";
 
 const router = Router();

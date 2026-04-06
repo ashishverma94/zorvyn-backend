@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { setupSwagger } from "./docs/swagger";
+import { setupSwagger } from "./docs/swagger.js";
 
 dotenv.config();
 
@@ -17,9 +17,9 @@ app.get("/", (req, res) => {
   res.send("Finance API running 🚀");
 });
 
-import authRoutes from "./modules/auth/auth.route"
-import financeRoutes from "./modules/finance/finance.route"
-import dashboardRoutes from "./modules/dashboard/dashboard.route";
+import authRoutes from "./modules/auth/auth.route.js"
+import financeRoutes from "./modules/finance/finance.route.js"
+import dashboardRoutes from "./modules/dashboard/dashboard.route.js";
 
 app.use("/api/auth",authRoutes)
 app.use("/api/finance",financeRoutes)

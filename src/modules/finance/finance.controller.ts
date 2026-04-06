@@ -1,5 +1,5 @@
 import { Response, NextFunction } from "express";
-import * as financeService from "./finance.service";
+import * as financeService from "./finance.service.js";
 
 export const createRecord = async (
   req: Request,
