@@ -4,7 +4,7 @@ import {
   getRecords,
   updateRecord,
   deleteRecord,
-} from "./finance.controller";
+} from "./finance.controller.js";
 import { authenticate, authorizeRoles } from "../../middleware/auth.js";
 
 const router = Router();
