@@ -9,7 +9,7 @@ router.get(
   "/summary",
   authenticate,
   authorizeRoles("VIEWER", "ANALYST", "ADMIN"),
-  getSummary,
+  getSummary as any,
 );
 
 // Category breakdown
@@ -17,7 +17,7 @@ router.get(
   "/category",
   authenticate,
   authorizeRoles("ANALYST", "ADMIN"),
-  getCategory,
+  getCategory as any,
 );
 
 // Monthly trends
@@ -25,7 +25,7 @@ router.get(
   "/trends",
   authenticate,
   authorizeRoles("ANALYST", "ADMIN"),
-  getTrends,
+  getTrends as any,
 );
 
 export default router;

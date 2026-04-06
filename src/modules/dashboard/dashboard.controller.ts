@@ -1,15 +1,14 @@
 import { Response, NextFunction } from "express";
 import * as dashboardService from "./dashboard.service";
-import { AuthRequest } from "../../middleware/auth";
 
 export const getSummary = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const data = await dashboardService.getDashboardSummary(
-      req.user!.userId
+      (req as any).user!.userId 
     );
 
     res.json({
@@ -22,13 +21,13 @@ export const getSummary = async (
 };
 
 export const getCategory = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const data = await dashboardService.getCategoryBreakdown(
-      req.user!.userId
+      (req as any).user!.userId
     );
 
     res.json({
@@ -41,13 +40,13 @@ export const getCategory = async (
 };
 
 export const getTrends = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const data = await dashboardService.getMonthlyTrends(
-      req.user!.userId
+      (req as any).user!.userId
     );
 
     res.json({

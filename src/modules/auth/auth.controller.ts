@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import * as authService from "./auth.service";
-import { AuthRequest } from "../../middleware/auth";
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -29,7 +28,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 };
 
 export const getMe = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {

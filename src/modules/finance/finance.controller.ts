@@ -1,9 +1,8 @@
 import { Response, NextFunction } from "express";
 import * as financeService from "./finance.service";
-import { AuthRequest } from "../../middleware/auth";
 
 export const createRecord = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
@@ -12,7 +11,7 @@ export const createRecord = async (
     console.log("hi")
     const record = await financeService.createRecord(
       req.body,
-      req.user!.userId
+      (req as any).user!.userId
     );
 
     res.status(201).json({
@@ -25,14 +24,14 @@ export const createRecord = async (
 };
 
 export const getRecords = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const data = await financeService.getRecords(
-      req.query,
-      req.user!.userId
+      (req as any).query,
+      (req as any).user!.userId
     );
 
     res.json({
@@ -45,15 +44,15 @@ export const getRecords = async (
 };
 
 export const updateRecord = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const record = await financeService.updateRecord(
-      req.params.id as string,
+      (req as any).params.id as string,
       req.body,
-      req.user!.userId
+      (req as any).user!.userId
     );
 
     res.json({
@@ -66,14 +65,14 @@ export const updateRecord = async (
 };
 
 export const deleteRecord = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
     await financeService.deleteRecord(
-      req.params.id as string,
-      req.user!.userId
+      (req as any).params.id as string,
+      (req as any).user!.userId
     );
 
     res.json({
