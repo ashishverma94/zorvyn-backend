@@ -1,0 +1,97 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────
+
+enum Role {
+  VIEWER    // Can only view dashboard summary + recent activity
+  ANALYST   // Can view records and access all insights
+  ADMIN     // Full access: create, update, delete records and manage users
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+// ─────────────────────────────────────────────
+// USER MODEL
+// ─────────────────────────────────────────────
+
+model User {
+  id                 String     @id @default(uuid())
+  name               String
+  email              String     @unique
+  password           String
+  role               Role       @default(VIEWER)
+  status             UserStatus @default(ACTIVE)
+
+  // Password reset fields
+  passwordResetToken String?    @unique
+  passwordResetExpiry DateTime?
+
+  // Relations
+  records            FinancialRecord[]
+  blacklistedTokens  BlacklistedToken[]
+
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("users")
+}
+
+// ─────────────────────────────────────────────
+// FINANCIAL RECORD MODEL
+// ─────────────────────────────────────────────
+
+model FinancialRecord {
+  id          String          @id @default(uuid())
+  amount      Decimal         @db.Decimal(15, 2)
+  type        TransactionType
+  category    String
+  date        DateTime
+  notes       String?
+  isDeleted   Boolean         @default(false)
+  deletedAt   DateTime?
+
+  // Relations
+  createdBy   User    @relation(fields: [userId], references: [id])
+  userId      String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("financial_records")
+}
+
+// ─────────────────────────────────────────────
+// BLACKLISTED TOKEN MODEL  (for logout)
+// ─────────────────────────────────────────────
+
+model BlacklistedToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  expiresAt DateTime
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+
+  createdAt DateTime @default(now())
+
+  @@map("blacklisted_tokens")
+}
