@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { AppError } from "../../middleware/errorHandler.js";
-import { prisma } from "../../config/prisma";
+import { prisma } from "../../config/prisma.js";
 
 export const registerUser = async (data: any) => {
   const { name, email, password } = data;

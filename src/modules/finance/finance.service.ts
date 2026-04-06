@@ -1,4 +1,4 @@
-import { prisma } from "../../config/prisma";
+import { prisma } from "../../config/prisma.js";
 import { AppError } from "../../middleware/errorHandler.js";
 
 export const createRecord = async (data: any, userId: string) => {
